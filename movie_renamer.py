@@ -26,9 +26,9 @@ def options():
       -h, --help            show this help message and exit
       -n NAME, --name NAME  what is the name of the directory?
       -r REMASTERED, --remastered REMASTERED
-                            is the film remastered? (True/False)
+                            is the film remastered? (t/f)
       -e EXTENDED, --extended EXTENDED
-                            is this film the extended version? (True/False)
+                            is this film the extended version? (t/f)
     ---------------------
     """
     # Create a new parser
@@ -54,7 +54,7 @@ def extract_data(name):
     """
     pattern = re.compile(r"""(?P<title>.+)                # Movie title
                              (?P<year>(19\d\d)|(20\d\d))  # Year released
-                             .*\.                         # Extra info (e.g Limited)
+                             .*\.                         # Extra info (e.g Remastered)
                              (?P<res>(\d){3,4}p)          # Resolution
                              """, re.VERBOSE)
 
