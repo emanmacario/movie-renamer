@@ -3,7 +3,8 @@
 #
 # Author: Emmanuel Macario
 # Date: 04/12/18
-# Version: v1.0
+# Version: v1.1
+# Last Mofified: 08/01/19
 
 import os
 import sys
@@ -65,6 +66,10 @@ def extract_data(name):
                              """, re.VERBOSE)
 
     match = pattern.match(name)
+    if match is None:
+        print("Error, invalid file name.")
+        sys.exit(1)
+
     title = match.group('title')
     year = match.group('year')
     res = match.group('res')
@@ -124,7 +129,7 @@ def rename_dir(old_name, new_name):
         os.rename(old_name, new_name)
         print(new_name)
     except FileNotFoundError:
-        print("Error, invalid file name.")
+        print("Error, file was not found.")
 
 
 
