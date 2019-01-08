@@ -41,6 +41,8 @@ def options():
         help="is the film remastered? (t/f)")
     parser.add_argument('-e', '--extended', type=str, default='f',
         help="is this film the extended version? (t/f)")
+    parser.add_argument('-d', '--directors', type=str, default='f',
+        help="is this version the director's cut?")
 
     # Parse and return command-line arguments
     return parser.parse_args()
@@ -95,10 +97,12 @@ def new_dir_name(args, data):
     # Create the new directory name
     dir_name_str = title + ' (' + year + ')'
 
-    if (args.remastered == 't'):
+    if args.remastered == 't':
         dir_name_str += ' (Remastered)'
-    if (args.extended == 't'):
+    if args.extended == 't':
         dir_name_str += ' (Extended)'
+    if args.directors == 't':
+        dir_name_str += ' (Director\'s Cut)'
 
     dir_name_str += ' [' + res + ']'
 
