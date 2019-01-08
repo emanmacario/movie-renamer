@@ -21,6 +21,7 @@ def options():
     --- Help Message: ---
 
     usage: movie_renamer.py [-h] [-n NAME] [-r REMASTERED] [-e EXTENDED]
+                        [-d DIRECTORS]
 
     optional arguments:
       -h, --help            show this help message and exit
@@ -29,6 +30,9 @@ def options():
                             is the film remastered? (t/f)
       -e EXTENDED, --extended EXTENDED
                             is this film the extended version? (t/f)
+      -d DIRECTORS, --directors DIRECTORS
+                            is this version the director's cut?
+
     ---------------------
     """
     # Create a new parser
@@ -115,7 +119,13 @@ def rename_dir(old_name, new_name):
     """
     old_name = DEFAULT_PATH + old_name
     new_name = DEFAULT_PATH + new_name
-    os.rename(old_name, new_name)
+
+    try:
+        os.rename(old_name, new_name)
+        print(new_name)
+    except FileNotFoundError:
+        print("Error, invalid file name.")
+
 
 
 # MAIN PROGRAM
@@ -124,7 +134,6 @@ def main():
     data = extract_data(str(args.name))
     new_name = new_dir_name(args, data)
     rename_dir(str(args.name), new_name)
-    print(new_name)
 
 
 if __name__ == "__main__":
